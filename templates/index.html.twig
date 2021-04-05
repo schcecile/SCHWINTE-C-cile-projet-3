@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="jumbotron text-center pb-5">
+        <h1><strong>Maximisez votre efficacité</strong></h1>
+        <br>
+        <p class="lead">Gérer l'ensemble des outils informatiques de l'entreprise est désormais possible grâce à Prorganize. Ce logiciel de gestion de relation client et d'organisation de planning a été conçu pour facilier votre travail au sein de votre PME. </p>
+    </div>
+
+    <div class="container">
+        <div class="card-columns">
+            <div class="card">
+                <img class="card-img-top" src="{{ asset('assets/img/img1.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Consultez votre répertoire</h5>
+                    <p class="card-text">La section "contacts" permet de centraliser l'ensemble des informations sur les clients et collaborateurs de la société.</p>
+                </div>
+            </div>
+            <div class="card p-3">
+                <blockquote class="blockquote mb-0 card-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">
+                        <small class="text-muted"> Lorem ipsum </small>
+                    </footer>
+                </blockquote>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="{{ asset('assets/img/img2.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Travaillez avec des outils</h5>
+                    <p class="card-text">Les outils informatiques offrent un confort de travail indispensable au sein d'une équipe.</p>
+                    <p class="card-text"><small class="text-muted"> <a href="{{ path('login') }}">Découvrez Prorganize</a></small></p>
+                </div>
+            </div>
+            <div class="card bg-primary text-white text-center p-3">
+                <blockquote class="blockquote mb-0">
+                    <h3>Prorganize</h3>
+                    <footer class="blockquote-footer">
+                        <small>
+                            Le logiciel CRM dont vous avez besoin
+                        </small>
+                    </footer>
+                </blockquote>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Lorem ipsum</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="{{ asset('assets/img/img3.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Gérez votre emploi du temps</h5>
+                    <p class="card-text">La section "calendrier" a été pensée de manière à regrouper l'ensemble des fonctions indispensables à un calendrier numérique.</p>
+                </div>
+            </div>
+            <div class="card p-3 text-right">
+                <blockquote class="blockquote mb-0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">
+                        <small class="text-muted"> Lorem ipsum </small>
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="jumbotron mt-5 bg-light">
+        <p class="lead text-center">Ayant dû adapter notre méthodologie de travail à votre façon de travailler, la première version de ce site web se concentre uniquement sur la gestion dans l'agenda professionnel.</p>
+        <hr>
+        <p class="text-center">Envie de découvrir ce que le site peut vous proposer ?</p>
+        <br>
+        <p class="text-center">
+            <a class="btn btn-info btn-lg" href="{{ path('login') }}">Se lancer</a>
+        </p>
+    </div>
+
+{% endblock %}

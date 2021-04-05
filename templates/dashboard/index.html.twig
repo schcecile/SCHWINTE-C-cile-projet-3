@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <h1 class="text-center py-5">Accès rapide</h1>
+
+
+        <div class="text-center">
+            <button class="btn btn-light"><a href="{{ path('calendar_new') }}">Créer un nouvel événement</a></button>
+            <button class="btn btn-light"><a href="#">Ajouter un nouveau contact</a></button>
+        </div>
+
+        <h1 class="text-center py-5">Événements à venir</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Journée entière</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for calendar in calendars %}
+                <tr>
+                    <td>{{ calendar.title }}</td>
+                    <td>{{ calendar.start ? calendar.start|date('d-m-y H:i:s') : '' }}</td>
+                    <td>{{ calendar.end ? calendar.end|date('d-m-y H:i:s') : '' }}</td>
+                    <td>{{ calendar.allDay ? 'Oui' : 'Non' }}</td>
+                    <td>{{ calendar.description }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun événement à afficher !</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <h1 class="text-center py-5">Derniers contacts ajoutés</h1>
+    </div>
+{% endblock %}

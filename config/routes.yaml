@@ -1,0 +1,46 @@
+# HomeController
+
+home:
+  path: /
+  controller: App\Controller\HomeController::index
+
+# MainController
+
+main:
+  path: /calendar
+  controller: App\Controller\MainController::index
+
+
+# DashboardController
+
+dashboard:
+  path: /tableau_de_bord
+  controller: App\Controller\DashboardController::dashboard
+
+# SecurityController
+
+registration:
+  path: /inscription
+  controller: App\Controller\SecurityController::registration
+
+login:
+  path: /connexion
+  controller: App\Controller\SecurityController::login
+
+logout:
+  path: /deconnexion
+  controller: App\Controller\SecurityController::logout
+
+# RGPD
+
+legals:
+  path: /mentions_legales
+  controller: App\Controller\SecurityController:legals
+
+conditions:
+  path: /conditions_generales
+  controller: App\Controller\SecurityController:conditions
+
+confidentiality:
+  path: /politique_confidentialite
+  controller: App\Controller\SecurityController:confidentiality

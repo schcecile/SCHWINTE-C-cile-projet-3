@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar index{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1 class="py-5">Liste des événements </h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Titre</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th>Journée entière</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for calendar in calendars %}
+                <tr>
+                    <td>{{ calendar.id }}</td>
+                    <td>{{ calendar.title }}</td>
+                    <td>{{ calendar.start ? calendar.start|date('d-m-y H:i:s') : '' }}</td>
+                    <td>{{ calendar.end ? calendar.end|date('d-m-y H:i:s') : '' }}</td>
+                    <td>{{ calendar.allDay ? 'Oui' : 'Non' }}</td>
+                    <td>{{ calendar.description }}</td>
+                    <td>
+                        <div style="display: contents">
+                        <a href="{{ path('calendar_show', {'id': calendar.id}) }}">Voir &nbsp; &nbsp;</a>
+                        |
+                        <a href="{{ path('calendar_edit', {'id': calendar.id}) }}">&nbsp; Editer &nbsp;</a>
+                        |
+                        </div>
+                        <div style="display: inline-flex">
+                            {{ include('calendar/_delete_form.html.twig') }}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    <div class="text-right">
+        <button class="btn btn-light"><a href="{{ path('calendar_new') }}">Créer un nouvel événement</a></button>
+    </div>
+    </div>
+{% endblock %}
