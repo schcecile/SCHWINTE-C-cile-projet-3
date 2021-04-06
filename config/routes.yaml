@@ -31,8 +31,6 @@ logout:
   path: /deconnexion
   controller: App\Controller\SecurityController::logout
 
-# RGPD
-
 legals:
   path: /mentions_legales
   controller: App\Controller\SecurityController:legals
@@ -44,3 +42,17 @@ conditions:
 confidentiality:
   path: /politique_confidentialite
   controller: App\Controller\SecurityController:confidentiality
+
+# UsersController
+
+users:
+  path: /users
+  controller: App\Controller\UsersController:index
+
+edit_password:
+  path: /modifier_mot_de_passe
+  controller: App\Controller\UsersController:editpassword
+
+edit_profile:
+  path: /modifier_profil
+  controller: App\Controller\UsersController:editprofile

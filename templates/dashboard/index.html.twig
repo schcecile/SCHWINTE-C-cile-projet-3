@@ -8,8 +8,20 @@
 
 
         <div class="text-center">
-            <button class="btn btn-light"><a href="{{ path('calendar_new') }}">Créer un nouvel événement</a></button>
-            <button class="btn btn-light"><a href="#">Ajouter un nouveau contact</a></button>
+            <a href="{{ path('calendar_new') }}">
+                <button class="btn btn-light">
+                    <img class="card-img-top my-2" style="width: 50px; height: 50px" src="{{ asset('assets/img/new_event.png') }}" alt="Nouvel événement">
+                    <br>
+                    <strong>Créer un nouvel événement</strong>
+                </button>
+            </a>
+            <a href="#">
+                <button class="btn btn-light">
+                    <img class="card-img-top my-2" style="width: 50px; height: 50px" src="{{ asset('assets/img/new_contact.png') }}" alt="Nouveau contact">
+                    <br>
+                    <strong>Ajouter un nouveau contact</strong>
+                </button>
+            </a>
         </div>
 
         <h1 class="text-center py-5">Événements à venir</h1>

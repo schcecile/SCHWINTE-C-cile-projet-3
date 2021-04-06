@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Calendar index{% endblock %}
+{% block title %}Liste des événements{% endblock %}
 
 {% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('main') }}">Calendrier</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste des événements</li>
+        </ol>
+    </nav>
     <div class="container">
 
         <h1 class="py-5">Liste des événements </h1>

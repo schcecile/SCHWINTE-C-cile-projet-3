@@ -4,22 +4,35 @@
 
 {% block body %}
     <div class="container py-5">
+        {% for message in app.flashes('message') %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
         <h1>Profil de {{ app.user.user_name }}</h1>
 
-        <div class="row pt-5">
-            <div class="col-md">
-                <h4>Pseudonyme :</h4>
+        <div class="row pt-5 text-center">
+            <div class="col-md card m-1 p-4 bg-light">
+                <h4>Prénom</h4>
+                <div>{{ app.user.first_name }}</div>
+            </div>
+            <div class="col-md card m-1 p-4 bg-light">
+                <h4>Nom</h4>
+                <div>{{ app.user.last_name }}</div>
+            </div>
+            <div class="col-md card m-1 p-4 bg-light">
+                <h4>Nom d'utilisateur</h4>
                 <div>{{ app.user.user_name }}</div>
             </div>
-            <div class="col-md">
-                <h4>Email :</h4>
+            <div class="col-md card m-1 p-4 bg-light">
+                <h4>Adresse email</h4>
                 <div>{{ app.user.email }}</div>
             </div>
         </div>
 
         <div class="mt-5 text-center">
-            <button class="btn btn-light"><a href="#">Modifier le profil</a></button>
-            <button class="btn btn-light"><a href="#">Modifier le mot de passe</a></button>
+            <button class="btn btn-light"><a href="{{ path('edit_profile') }}">Modifier le profil</a></button>
+            <button class="btn btn-light"><a href="{{ path('edit_password') }}">Modifier le mot de passe</a></button>
         </div>
 
     </div>

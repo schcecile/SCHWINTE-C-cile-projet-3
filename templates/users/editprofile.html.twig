@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du mot de passe de {{ app.user.user_name }}{% endblock %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('users') }}">Profil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modification du profil</li>
+        </ol>
+    </nav>
+    <div class="container py-5">
+        <h1>Modification du profil</h1>
+        {{ form(form) }}
+    </div>
+{% endblock %}
