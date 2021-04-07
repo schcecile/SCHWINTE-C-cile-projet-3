@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -56,6 +58,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     public $last_name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Calendar::class, inversedBy="users")
+     */
+    private $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -126,6 +138,30 @@ class User implements UserInterface
     public function setLastName(?string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Calendar[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Calendar $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Calendar $event): self
+    {
+        $this->events->removeElement($event);
 
         return $this;
     }

@@ -19,7 +19,8 @@
                 initialView: 'dayGridMonth',
                 locale: 'FR',
                 timeZone: 'Europe/Paris',
-                // changes the default name of the buttons to French
+
+                //changes the default name of the buttons to French
                 buttonText: {
                     today: 'Aujourd\'hui',
                     month: 'Mois',
@@ -27,14 +28,17 @@
                     day:   'Jour',
                     list:  'Liste',
                 },
-                // displays the different elements at the top of the calendar
+
+                //displays the different elements at the top of the calendar
                 headerToolbar: {
                     start: 'prev,next today',
                     center: 'title',
                     end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
-                // displays the events in the calendar
+
+                //displays the events in the calendar
                 events: {{ data|raw }},
+
                 // displays a link that looks like “+2 more” when there are more than 3 events per day
                 dayMaxEvents: true,
                 views: {
@@ -42,12 +46,8 @@
                         dayMaxEvents: 3
                     }
                 },
-                // changes the opacity on click
-                eventClick: function(info) {
-                    info.el.style.opacity = '0.5';
-                }
             })
-            // displays the calendar on the page
+            //displays the calendar on the page
             calendar.render()
         }
     </script>

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CalendarRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,16 @@ class Calendar
      * @ORM\Column(type="string", length=7)
      */
     private $background_color;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="events")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,33 @@ class Calendar
     public function setBackgroundColor(string $background_color): self
     {
         $this->background_color = $background_color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeEvent($this);
+        }
 
         return $this;
     }

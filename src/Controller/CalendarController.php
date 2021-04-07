@@ -6,6 +6,7 @@ use App\Entity\Calendar;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,12 +17,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class CalendarController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
+     */
+
+
+    /**
      * @Route("/", name="calendar_index", methods={"GET"})
      */
-    public function index(CalendarRepository $calendarRepository): Response
+    public function index(CalendarRepository $calendar): Response
     {
+        $user = $this->getUser();
+        $calendars = $calendar->findEventsByUser($user);
         return $this->render('calendar/index.html.twig', [
-            'calendars' => $calendarRepository->findAll(),
+            "calendars" => $calendars,
         ]);
     }
 
@@ -35,6 +43,7 @@ class CalendarController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $calendar->addUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($calendar);
             $entityManager->flush();

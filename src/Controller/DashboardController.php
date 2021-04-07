@@ -11,11 +11,16 @@ class DashboardController extends AbstractController
 {
     /**
      * @IsGranted("ROLE_USER")
-         */
+     */
     public function dashboard(CalendarRepository $calendarRepository)
     {
-            return $this->render('dashboard/index.html.twig', [
-            'calendars' => $calendarRepository->findAll(),
+        $user = $this->getUser();
+        if($user){
+            $calendars = $calendarRepository->displayLastEvents($user);
+
+        }
+        return $this->render('dashboard/index.html.twig', [
+        'calendars' => $calendars,
         ]);
     }
 

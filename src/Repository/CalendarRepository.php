@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Calendar;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +20,29 @@ class CalendarRepository extends ServiceEntityRepository
         parent::__construct($registry, Calendar::class);
     }
 
-    // /**
-    //  * @return Calendar[] Returns an array of Calendar objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    //displays all the events of a user (function called in the calendar page)
+    public function findEventsByUser(User $user)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('e')
+            ->join('e.users', 'user')
+            ->where('user.id = :user')
+            ->setParameter('user', $user)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Calendar
+    //displays the 5 last events (function called in the dashboard page)
+    public function displayLastEvents (User $user)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createQueryBuilder('e')
+                ->join('e.users', 'user')
+                ->where('user.id = :user')
+                ->setParameter('user', $user)
+                ->orderBy('e.id', 'DESC')
+                ->setMaxResults(3)
+                ->getQuery()
+                ->execute();
     }
-    */
+
 }

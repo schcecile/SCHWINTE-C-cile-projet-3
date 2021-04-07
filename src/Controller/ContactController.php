@@ -6,9 +6,14 @@ use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ContactController extends AbstractController
 {
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+
     /**
      * @Route("/contact", name="contact")
      */

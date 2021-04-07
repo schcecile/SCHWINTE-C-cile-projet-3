@@ -4,14 +4,18 @@ namespace App\Controller;
 
 use App\Repository\CalendarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class MainController extends AbstractController
 {
+    /**
+     * @IsGranted("ROLE_USER")
+     */
 
     public function index(CalendarRepository $calendar)
     {
-        $events = $calendar->findAll();
+        $user = $this->getUser();
+        $events = $calendar->findEventsByUser($user);
 
         $rdvs = [];
 

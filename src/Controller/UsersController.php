@@ -6,27 +6,33 @@ use App\Form\EditProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class UsersController extends AbstractController
 {
+    /**
+     * @IsGranted("ROLE_USER")
+     */
 
     public function index()
     {
         return $this->render('users/index.html.twig');
     }
 
-
     public function editprofile (Request $request)
     {
         $user = $this->getUser();
         $form = $this->createForm(EditProfileType::class, $user);
+
         $form->handleRequest($request);
 
+        //if all conditions are met
         if ($form->isSubmitted() AND $form->isValid()){
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
+            //displays a success message
             $this->addFlash('message', 'Profil mis à jour avec succès !');
             return $this->redirectToRoute('users');
         }
