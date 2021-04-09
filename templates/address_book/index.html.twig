@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carnet de contacts{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+
+        <div class="container py-5 text-right">
+            <div style="display: inline-flex">
+                <button class="btn btn-light mr-1"><a href="{{ path('address_create') }}">Ajouter un contact</a></button>
+                <button class="btn btn-light mr-1"><a href="">Filtrer</a></button>
+                <span class="input-group rounded">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                           aria-describedby="search-addon" />
+                    <span class="input-group-text border-0" id="search-addon">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <h1>Liste des contacts</h1>
+
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Civilité</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Catégorie</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for address in address %}
+                <tr>
+                    <td>{{ address.title }}</td>
+                    <td>{{ address.first_name }}</td>
+                    <td>{{ address.last_name }}</td>
+                    <td>{{ address.email }}</td>
+                    <td>{{ address.mobile }}</td>
+                    <td>{{ address.category }}</td>
+                    <td>
+                        <div style="display: contents">
+                            <a href="{{ url('address_show', {id: address.id}) }}">Voir &nbsp; &nbsp;</a>
+                            |
+                            <a href="{{ url('address_edit', {id: address.id}) }}">&nbsp; Editer &nbsp;</a>
+                            |
+                        </div>
+                        <div style="display: inline-flex">
+                            {{ include('address_book/_delete_form.html.twig') }}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun contact à afficher !</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+{% endblock %}
+
+

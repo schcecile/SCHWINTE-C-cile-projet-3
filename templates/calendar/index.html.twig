@@ -11,6 +11,10 @@
     </nav>
     <div class="container">
 
+
+        <div class="text-right">
+            <button class="btn btn-light"><a href="{{ path('calendar_new') }}">Créer un nouvel événement</a></button>
+        </div>
         <h1 class="py-5">Liste des événements </h1>
 
         <table class="table">
@@ -54,8 +58,5 @@
             </tbody>
         </table>
 
-    <div class="text-right">
-        <button class="btn btn-light"><a href="{{ path('calendar_new') }}">Créer un nouvel événement</a></button>
-    </div>
     </div>
 {% endblock %}

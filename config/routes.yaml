@@ -56,3 +56,36 @@ edit_password:
 edit_profile:
   path: /modifier_profil
   controller: App\Controller\UsersController:editprofile
+
+
+# AddressBookController
+
+address_index:
+  methods: GET
+  path: /address/
+  controller: App\Controller\AddressBookController::index
+
+address_edit:
+  methods: GET
+  path: /address/modifier/{id}
+  controller: App\Controller\AddressBookController::edit
+
+address_create:
+  methods: GET
+  path: /address/nouveau
+  controller: App\Controller\AddressBookController::create
+
+address_show:
+  methods: GET
+  path: /address/voir/{id}
+  controller: App\Controller\AddressBookController::show
+
+address_store:
+  methods: POST
+  path: /address/nouveau
+  controller: App\Controller\AddressBookController::store
+
+address_delete:
+  methods: DELETE
+  path: /{id}
+  controller: App\Controller\AddressBookController::delete
