@@ -64,6 +64,11 @@ class User implements UserInterface
      */
     private $events;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $agree_terms;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -162,6 +167,18 @@ class User implements UserInterface
     public function removeEvent(Calendar $event): self
     {
         $this->events->removeElement($event);
+
+        return $this;
+    }
+
+    public function getAgreeTerms(): ?bool
+    {
+        return $this->agree_terms;
+    }
+
+    public function setAgreeTerms(bool $agree_terms): self
+    {
+        $this->agree_terms = $agree_terms;
 
         return $this;
     }
