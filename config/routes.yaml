@@ -66,7 +66,7 @@ address_index:
   controller: App\Controller\AddressBookController::index
 
 address_edit:
-  methods: GET
+  methods: GET|POST
   path: /address/modifier/{id}
   controller: App\Controller\AddressBookController::edit
 

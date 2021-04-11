@@ -3,14 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Form\AddressType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class AddressBookController extends AbstractController
 {
-
+    /**
+     * @IsGranted("ROLE_USER")
+     */
     public function index(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(Address::class);
@@ -63,40 +67,21 @@ class AddressBookController extends AbstractController
         ]);
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Address $address): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $repository = $entityManager->getRepository(Address::class);
+        $form = $this->createForm(AddressType::class, $address);
+        $form->handleRequest($request);
 
-        $address = $repository->find($id);
-        if (!$address) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
-        }
-        if ($title = $request->get('title')) {
-            $address->setTitle((string) $title);
-        }
-        if ($first_name = $request->get('first_name')) {
-            $address->setFirstName((string) $first_name);
-        }
-        if ($last_name = $request->get('last_name')) {
-            $address->setLastName((string) $last_name);
-        }
-        if ($email = $request->get('email')) {
-            $address->setEmail((string) $email);
-        }
-        if ($mobile = $request->get('mobile')) {
-            $address->setMobile((string) $mobile);
-        }
-        if ($category = $request->get('category')) {
-            $address->setCategory((string) $category);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('address_index');
         }
 
-        $entityManager->flush();
-
-        return $this->redirectToRoute('address_index');
-
+        return $this->render('address_book/edit.html.twig', [
+            'address' => $address,
+            'form' => $form->createView(),
+        ]);
     }
 
     public function delete(Request $request, Address $address)

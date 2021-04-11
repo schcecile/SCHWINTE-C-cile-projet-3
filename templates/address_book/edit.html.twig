@@ -4,33 +4,18 @@
 {%  block title %}Modifier le contact {% endblock %}
 
 {% block body %}
-    <form action="{{ address ? '' : url('address_store') }}" method="POST">
-        <label for="title">Civilité</label>
-        <input id="title" type="text" name="title" value="{{ address.title }}">
-        <br>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('address_index') }}">Carnet de contacts</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modifier le contact</li>
+        </ol>
+    </nav>
+    <div class="container py-5">
+        <h1>Modifier le contact</h1>
 
-        <label for="first_name">Prénom</label>
-        <input id="first_name" type="text" name="first_name" value="{{ address.first_name }}">
-        <br>
-
-        <label for="last_name">Nom</label>
-        <input id="last_name" type="text" name="last_name" value="{{ address.last_name }}">
-        <br>
-
-        <label for="email">Email</label>
-        <input id="email" type="text" name="email" value="{{ address.email }}">
-        <br>
-
-        <label for="mobile">Téléphone</label>
-        <input id="mobile" type="text" name="mobile" value="{{ address.mobile }}">
-        <br>
-
-        <label for="category">Catégorie</label>
-        <input id="category" type="text" name="category" value="{{ address.category }}">
-        <br>
-
-        <input type="submit" value="Modifier">
-    </form>
+    {{ include('address_book/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    {{ include('address_book/_delete_form.html.twig') }}
+    </div>
 
 {% endblock %}
 
